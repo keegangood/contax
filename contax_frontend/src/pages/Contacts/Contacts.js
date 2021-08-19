@@ -50,14 +50,13 @@ const Contacts = ({ history }) => {
   useEffect(() => {
     if (!contacts && !formAction) {
       (async () => {
-        console.log("GETTING ALL CONTACTS");
         await dispatch(requestAccessToken())
           .then(unwrapResult)
           .then((res) => {
             const { accessToken } = res;
             dispatch(getContacts({ accessToken, orderBy }));
           })
-          .catch((err) => console.error("GET ALL CONTACTS ERROR", err));
+          .catch((err) => console.error(err));
       })();
     }
   }, [contacts, dispatch]);
@@ -77,7 +76,6 @@ const Contacts = ({ history }) => {
               dispatch(getContacts({ accessToken, orderBy }));
               dispatch(setNotes([]));
               dispatch(addAlert(alert));
-              setTimeout(() => dispatch(removeAlert(alert)), 3000);
               history.push(`/app/detail/${res.contact.id}`);
             })
             .catch((err) => {
@@ -87,7 +85,6 @@ const Contacts = ({ history }) => {
         .catch((err) => {
           let alert = { text: "Must be logged in!", alertType: "danger" };
           dispatch(addAlert(alert));
-          setTimeout(() => dispatch(removeAlert(alert)), 3000);
         });
     })();
   };
@@ -105,7 +102,6 @@ const Contacts = ({ history }) => {
             .then((res) => {
               let alert = { text: "Contact updated!", alertType: "success" };
               dispatch(addAlert(alert));
-              setTimeout(() => dispatch(removeAlert(alert)), 3000);
 
               dispatch(setCurrentContact(null));
               dispatch(getContacts({ accessToken, orderBy }));
