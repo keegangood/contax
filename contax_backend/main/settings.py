@@ -1,5 +1,8 @@
 from pathlib import Path
 import decouple
+import psycopg2
+import dj_database_url
+import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -7,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = decouple.config('DJANGO_DEBUG')
+DEBUG = decouple.config('DJANGO_DEBUG', cast=bool)
 
 # set SECRET_KEY based on value of DEBUG
 if DEBUG:
@@ -38,6 +41,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
@@ -73,6 +77,8 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -80,6 +86,11 @@ DATABASES = {
     }
 }
 
+DATABASE_URL = decouple.config('DATABASE_URL')
+
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -201,3 +212,5 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'withcredentials'
 ]
+
+django_heroku.settings(locals())
