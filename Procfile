@@ -1,1 +1,1 @@
-web: gunicorn contax.wsgi
+web: gunicorn contax_backend/contax.wsgi
