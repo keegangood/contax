@@ -4,6 +4,7 @@ import axios from "axios";
 const BASE_URL = "https://contaxapp.herokuapp.com/contacts";
 const headers = {
   "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "https://contaxapp.heroku.com/",
 };
 
 axios.defaults.withCredentials = true;
@@ -109,7 +110,7 @@ export const deleteContact = createAsyncThunk(
 const _filterContacts = (contacts, filterBy, query) => {
   let filteredContacts = [];
 
-  if(query === '') return contacts
+  if (query === "") return contacts;
 
   if (filterBy === "name") {
     filteredContacts = contacts.filter(
@@ -123,15 +124,14 @@ const _filterContacts = (contacts, filterBy, query) => {
     );
   } else if (filterBy === "phone") {
     filteredContacts = contacts.filter(
-      (contact) => 
+      (contact) =>
         (contact.cellPhoneNumber && contact.cellPhoneNumber.includes(query)) ||
         (contact.homePhoneNumber && contact.homePhoneNumber.includes(query)) ||
         (contact.workPhoneNumber && contact.workPhoneNumber.includes(query))
     );
   }
-  
 
-  return filteredContacts
+  return filteredContacts;
 };
 
 const initialState = {
@@ -172,7 +172,6 @@ const ContactSlice = createSlice({
       };
     },
     filterContacts: (state, action) => {
-
       let filtered = _filterContacts(
         state.contacts,
         state.filterBy,
@@ -187,16 +186,13 @@ const ContactSlice = createSlice({
     },
   },
   setContactNotes: (state, action) => {
-    const {contactId, notes} = action.payload
+    const { contactId, notes } = action.payload;
     return {
-      ...state, 
-      contacts: state.contacts.map(
-        contact=>
-        contact.id===contactId 
-          ? {...contact, notes: notes}
-          : contact
-      )
-    }
+      ...state,
+      contacts: state.contacts.map((contact) =>
+        contact.id === contactId ? { ...contact, notes: notes } : contact
+      ),
+    };
   },
   extraReducers: {
     // GET CONTACTS

@@ -11,6 +11,7 @@ const initialState = {
 const BASE_URL = "https://contaxapp.herokuapp.com/users";
 const headers = {
   "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "https://contaxapp.heroku.com/",
 };
 
 axios.defaults.withCredentials = true;
@@ -61,8 +62,6 @@ export const requestAccessToken = createAsyncThunk(
     return response;
   }
 );
-
-
 
 export const logout = createAsyncThunk(
   "auth/logout",
