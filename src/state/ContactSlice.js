@@ -4,7 +4,7 @@ import axios from "axios";
 const BASE_URL = "https://contaxapp.herokuapp.com/contacts";
 const headers = {
   "Content-Type": "application/json",
-  "Access-Control-Allow-Origin": "https://contaxapp.heroku.com/",
+  "Access-Control-Allow-Origin": "contaxapp.heroku.com",
 };
 
 axios.defaults.withCredentials = true;
