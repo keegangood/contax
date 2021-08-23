@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8000/contacts";
+const BASE_URL = "https://contaxapp.herokuapp.com/contacts";
 const headers = {
   "Content-Type": "application/json",
 };

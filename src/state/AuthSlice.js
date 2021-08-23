@@ -8,7 +8,7 @@ const initialState = {
   authLoadingStatus: "PENDING", // status of async operation ['IDLE', 'PENDING', 'SUCCESS', 'FAIL']
 };
 
-const BASE_URL = "http://localhost:8000/users";
+const BASE_URL = "https://contaxapp.herokuapp.com/users";
 const headers = {
   "Content-Type": "application/json",
 };
