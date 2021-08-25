@@ -53,7 +53,7 @@ export const requestAccessToken = createAsyncThunk(
     const url = BASE_URL + "/token/";
 
     const response = await axios
-      .get(url, {
+      .get(url, {}, {
         headers: headers,
       })
       .then((res) => res.data)
