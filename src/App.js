@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-
+import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector, connect } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { logout } from "./state/AuthSlice";
@@ -25,6 +25,11 @@ import { requestAccessToken } from "./state/AuthSlice";
 
 function App({ history }) {
   const dispatch = useDispatch();
+  const [cookies, setCookie, removeCookie] = useCookies();
+
+  setCookie('testCookie', 'Testing cookies', {})
+
+  console.log('cookies', cookies)
 
   let { isAuthenticated, authLoadingStatus, user } = useSelector(
     (state) => state.auth
