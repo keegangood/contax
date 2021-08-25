@@ -12,6 +12,7 @@ const BASE_URL = "https://contaxapp.herokuapp.com/users";
 const headers = {
   Accept: "application/json",
   "Access-Control-Allow-Origin": "contaxapp.heroku.com",
+  "Content-Type": "multipart/form-data"
 };
 
 axios.defaults.withCredentials = true;
@@ -22,10 +23,7 @@ export const login = createAsyncThunk(
     const url = BASE_URL + "/login/";
     const response = axios
       .post(url, formData, {
-        headers: {
-          ...headers,
-          "Content-Type": "multipart/form-data",
-        },
+        headers: headers,
       })
       .then((res) => res.data)
       .catch((err) => rejectWithValue(err.response.data));
