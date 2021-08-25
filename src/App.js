@@ -27,10 +27,10 @@ function App({ history }) {
   const dispatch = useDispatch();
   const [cookies, setCookie, removeCookie] = useCookies([]);
 
-  console.log('cookies', cookies)
-  setCookie('testCookie', 'Testing cookies', {})
+  console.log('cookies before', cookies)
+  setCookie(`testCookie${Math.round(Math.random() * 100)})`, 'Testing cookies', {})
 
-  console.log('cookies', cookies)
+  console.log('cookies after', cookies)
 
   let { isAuthenticated, authLoadingStatus, user } = useSelector(
     (state) => state.auth
