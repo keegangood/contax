@@ -28,10 +28,8 @@ function App({ history }) {
   const [cookies, setCookie, removeCookie] = useCookies([]);
 
   useEffect(()=>{
-    Object.keys(document.cookie).map(key=>{
-      removeCookie(key)
-    })
-  },[])
+    console.log('cookies', cookies)
+  },[cookies])
 
   let { isAuthenticated, authLoadingStatus, user } = useSelector(
     (state) => state.auth
