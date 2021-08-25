@@ -1,7 +1,7 @@
 import { React, useEffect } from "react";
 import { useDispatch, connect, useSelector } from "react-redux";
 import { withRouter } from "react-router";
-
+import { useCookies } from "react-cookie";
 import "./scss/UserAuth.scss";
 import UserAuthForm from "./UserAuthForm";
 // import Loading from "../../layout/Loading";
@@ -37,6 +37,8 @@ const SignupExtra = (
 const UserAuth = ({ pageAction, pageTitle, history, ...props }) => {
   const dispatch = useDispatch();
 
+  const [cookies, setCookie, removeCookie] = useCookies([]);
+
   const { accessToken } = useSelector((state) => state.auth);
 
   const callApi = async (formData) => {
@@ -50,6 +52,7 @@ const UserAuth = ({ pageAction, pageTitle, history, ...props }) => {
           // set alert
           let alert = { text: "Welcome!", alertType: "success" };
           dispatch(addAlert(alert));
+          console.log('cookies', cookies)
 
           // redirect
           if (history) {
