@@ -25,7 +25,7 @@ import { requestAccessToken } from "./state/AuthSlice";
 
 function App({ history }) {
   const dispatch = useDispatch();
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const [cookies, setCookie, removeCookie] = useCookies([]);
 
   setCookie('testCookie', 'Testing cookies', {})
 
