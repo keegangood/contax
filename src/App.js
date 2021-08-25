@@ -27,10 +27,6 @@ function App({ history }) {
   const dispatch = useDispatch();
   const [cookies, setCookie, removeCookie] = useCookies([]);
 
-  useEffect(()=>{
-    console.log('cookies', cookies)
-  },[cookies])
-
   let { isAuthenticated, authLoadingStatus, user } = useSelector(
     (state) => state.auth
   );
