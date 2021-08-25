@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
+import { CookiesProvider } from "react-cookie";
 import { Provider } from "react-redux";
 import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
 import rootReducer from "./state";
@@ -17,11 +17,13 @@ let history = createBrowserHistory();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Router history={history}>
-        <App history={history} />
-      </Router>
-    </Provider>
+    <CookiesProvider>
+      <Provider store={store}>
+        <Router history={history}>
+          <App history={history} />
+        </Router>
+      </Provider>
+    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
