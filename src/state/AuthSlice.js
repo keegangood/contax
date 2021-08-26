@@ -20,6 +20,8 @@ axios.defaults.withCredentials = true;
 export const login = createAsyncThunk(
   "auth/login",
   async (formData, { rejectWithValue }) => {
+    const formData = new formData({...formData});
+    console.log(formData)
     const url = BASE_URL + "/login/";
     const response = axios
       .post(url, formData, {
