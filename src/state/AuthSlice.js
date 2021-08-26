@@ -22,6 +22,7 @@ export const login = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     const formData = new formData({...formData});
     console.log(formData)
+    console.log('LOLOLOLOLOLOLOL')
     const url = BASE_URL + "/login/";
     const response = axios
       .post(url, formData, {
