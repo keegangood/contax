@@ -12,7 +12,7 @@ const BASE_URL = "https://contaxapp.herokuapp.com/users";
 const headers = {
   Accept: "application/json",
   "Access-Control-Allow-Origin": "contaxapp.heroku.com",
-  "Content-Type": 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
+  // "Content-Type": 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
 };
 
 axios.defaults.withCredentials = true;
