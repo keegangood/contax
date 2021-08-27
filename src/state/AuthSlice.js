@@ -12,7 +12,6 @@ const BASE_URL = "https://contaxapp.herokuapp.com/users";
 const headers = {
   Accept: "application/json",
   "Access-Control-Allow-Origin": "contaxapp.heroku.com",
-  // "Content-Type": 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
 };
 
 axios.defaults.withCredentials = true;
@@ -20,9 +19,6 @@ axios.defaults.withCredentials = true;
 export const login = createAsyncThunk(
   "auth/login",
   async (formData, { rejectWithValue }) => {
-    const formData = new formData({...formData});
-    console.log(formData)
-    console.log('LOLOLOLOLOLOLOL')
     const url = BASE_URL + "/login/";
     const response = axios
       .post(url, formData, {
