@@ -40,7 +40,7 @@ const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <Row className="g-0 mx-3 pt-md-5 mt-5" id="contact-list">
       {contacts.length === 0
-        ? <Col xs={12} className="text-center">
+        ? <Col xs={12} lg={8} className="text-center">
           <h1 className="display-1 text-secondary">
             No contacts
           </h1>
