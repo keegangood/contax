@@ -73,7 +73,7 @@ const ContactItem = ({
             text-decoration-none
           "
         >
-          <Col xs={12} md={2} className="d-flex justify-content-center">
+          <Col xs={12} md={3} className="d-flex justify-content-center">
             <ContactAvatar contact={contact} />
           </Col>
 
