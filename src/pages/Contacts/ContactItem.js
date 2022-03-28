@@ -46,6 +46,8 @@ const ContactItem = ({
   return (
     <Col
       sm={12}
+      md={{size:8, offset: 2}}
+      lg={{size:6, offset: 3}}
       className="px-0 pb-2 mb-3 pb-md-3 mb-md-4 contact-item shadow rounded"
       id={`contact-${contact.id}`}
     >

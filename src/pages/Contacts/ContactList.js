@@ -39,21 +39,26 @@ const ContactList = ({ contacts, onDeleteContact }) => {
 
   return (
     <Row className="g-0 mx-3 pt-md-5 mt-5" id="contact-list">
-      {contacts.length === 0
-        ? <Col xs={12} lg={8} xl={6} className="text-center">
-          <h1 className="display-1 text-secondary">
-            No contacts
-          </h1>
+      {contacts.length === 0 ? (
+        <Col
+          xs={12}
+          lg={{ size: 8, offset: 2 }}
+          xl={{ size: 6, offset: 3 }}
+          className="text-center"
+        >
+          <h1 className="display-1 text-secondary">No contacts</h1>
         </Col>
-        : contacts.map((contact, i) => (
-            <ContactItem
-              contact={contact}
-              togglePopover={togglePopover}
-              popoverIsOpen={popoversOpen[contact.id]}
-              onDeleteContact={onDeleteContact}
-              key={i}
-            />
-          ))}
+      ) : (
+        contacts.map((contact, i) => (
+          <ContactItem
+            contact={contact}
+            togglePopover={togglePopover}
+            popoverIsOpen={popoversOpen[contact.id]}
+            onDeleteContact={onDeleteContact}
+            key={i}
+          />
+        ))
+      )}
     </Row>
   );
 };
