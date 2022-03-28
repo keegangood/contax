@@ -18,12 +18,5 @@ See the app in production [here](https://contaxapp.netlify.app/).
 ### Backend
 
 The backend is a REST API written with Django. The source code is available [here](https://github.com/perennialAutodidact/contax_backend).
-## Available Scripts
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
