@@ -79,7 +79,7 @@ const ContactItem = ({
 
           <Col
             xs={12}
-            md={10}
+            md={9}
             className="
               contact-field
               name-field
