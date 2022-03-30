@@ -22,7 +22,10 @@ import Alerts from "./components/Alerts/Alerts";
 import PrivateRoute from "./components/PrivateRoute";
 
 import { requestAccessToken } from "./state/AuthSlice";
-
+import {
+  getContacts,
+  orderBy
+} from "./state/ContactSlice";
 function App({ history }) {
   const dispatch = useDispatch();
   const [cookies, setCookie, removeCookie] = useCookies([]);
@@ -30,18 +33,25 @@ function App({ history }) {
   let { isAuthenticated, authLoadingStatus, user } = useSelector(
     (state) => state.auth
   );
+const { contactLoadingStatus } = useSelector(state=>state.contacts)
+
   const { alerts } = useSelector((state) => state.alerts);
 
   const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
-    if (!isAuthenticated && !user && authLoadingStatus === "PENDING") {
+    // if (!isAuthenticated && !user && authLoadingStatus === "PENDING") {
       (async () => {
         console.log('REQUESTING TOKEN FROM APP')
-        await dispatch(requestAccessToken());
+        await dispatch(requestAccessToken()).then(unwrapResult)
+        .then((res) => {
+          const { accessToken } = res;
+          dispatch(getContacts({ accessToken, orderBy }));
+        })
+        .catch((err) => console.error(err));;
       })();
-    }
-  }, [isAuthenticated, user, authLoadingStatus]);
+    // }
+  }, []);
 
   const onLogout = () => {
     dispatch(logout())
@@ -54,7 +64,7 @@ function App({ history }) {
 
   return (
     <Container fluid className="app g-0">
-      {authLoadingStatus === "PENDING" ? (
+      {authLoadingStatus === "PENDING" || contactLoadingStatus === 'PENDING'? (
         <div
           className="
             spinner
@@ -63,7 +73,8 @@ function App({ history }) {
             justify-content-center
           "
         >
-          <Spinner color="info"> </Spinner>
+          <Spinner color="info" className="spinner-border"> </Spinner>
+          
         </div>
       ) : (
         <div className="mt-5">

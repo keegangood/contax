@@ -265,6 +265,7 @@ export const {
   setOrderBy,
   setFilterBy,
   filterContacts,
+  orderBy
 } = ContactSlice.actions;
 
 export default ContactSlice.reducer;

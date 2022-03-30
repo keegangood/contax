@@ -46,20 +46,6 @@ const Contacts = ({ history }) => {
   //
   //
 
-  // GET ALL CONTACTS
-  useEffect(() => {
-    if (!contacts && !formAction) {
-      (async () => {
-        await dispatch(requestAccessToken())
-          .then(unwrapResult)
-          .then((res) => {
-            const { accessToken } = res;
-            dispatch(getContacts({ accessToken, orderBy }));
-          })
-          .catch((err) => console.error(err));
-      })();
-    }
-  }, [contacts, dispatch]);
 
   // CREATE CONTACT
   const onCreateContact = (formData) => {
@@ -138,59 +124,53 @@ const Contacts = ({ history }) => {
   return (
     <Container fluid className="pb-5">
       <Row className="g-0">
-        {!contacts && !currentContact && contactLoadingStatus === "PENDING" ? (
-          <div className="spinner d-flex align-items-center justify-content-center">
-            <Spinner color="info"> </Spinner>
-          </div>
-        ) : (
-          <Col xs={12}>
-            <Switch>
-              <Route
-                path={`${path}/add`}
-                formAction="add"
-                onSubmit={onCreateContact}
-                component={() => (
-                  <ContactForm
-                    formAction="add"
-                    onSubmit={onCreateContact}
-                    history={history}
-                  />
-                )}
-              />
-              <Route
-                path={`${path}/detail/:contactId`}
-                component={() => (
-                  <ContactDetail
-                    onDeleteContact={onDeleteContact}
-                    formAction="edit"
-                    history={history}
-                  />
-                )}
-              />
-              <Route
-                path={`${path}/edit/:contactId`}
-                component={() => (
-                  <ContactForm
-                    formAction="edit"
-                    onSubmit={onUpdateContact}
-                    history={history}
-                  />
-                )}
-              />
-              <Route
-                path={path}
-                component={() => (
-                  <ContactList
-                    contacts={filteredContacts}
-                    onDeleteContact={onDeleteContact}
-                  />
-                )}
-              />
-            </Switch>
+        <Col xs={12}>
+          <Switch>
+            <Route
+              path={`${path}/add`}
+              formAction="add"
+              onSubmit={onCreateContact}
+              component={() => (
+                <ContactForm
+                  formAction="add"
+                  onSubmit={onCreateContact}
+                  history={history}
+                />
+              )}
+            />
+            <Route
+              path={`${path}/detail/:contactId`}
+              component={() => (
+                <ContactDetail
+                  onDeleteContact={onDeleteContact}
+                  formAction="edit"
+                  history={history}
+                />
+              )}
+            />
+            <Route
+              path={`${path}/edit/:contactId`}
+              component={() => (
+                <ContactForm
+                  formAction="edit"
+                  onSubmit={onUpdateContact}
+                  history={history}
+                />
+              )}
+            />
+            <Route
+              path={path}
+              component={() => (
+                <ContactList
+                  contacts={filteredContacts}
+                  onDeleteContact={onDeleteContact}
+                />
+              )}
+            />
+          </Switch>
 
-            <PlusButton history={history} />
-          </Col>
-        )}
+          <PlusButton history={history} />
+        </Col>
       </Row>
     </Container>
   );
