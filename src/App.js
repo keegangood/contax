@@ -48,7 +48,7 @@ const { contactLoadingStatus } = useSelector(state=>state.contacts)
           const { accessToken } = res;
           dispatch(getContacts({ accessToken, orderBy }));
         })
-        .catch((err) => console.error(err));;
+        .catch((err) => alert(err));
       })();
     // }
   }, []);
