@@ -13,7 +13,18 @@ const Avatar = (props) => {
       }
     >
       {/* LOAD USER AVATAR ONCE AVAILABLE */}
-      <AiOutlineCamera />
+      {props.user && props.user.email === "guest@contax.com" ? (
+        <div className="rounded-circle d-flex align-items-center justify-content-center" style={{ objectFit: "contain" }}>
+          <img
+            src={`https://picsum.photos/${200 + Math.abs(props.id - 5)}`}
+            alt="Avatar"
+            className="rounded-circle"
+            style={{width:'90%'}}
+          />
+        </div>
+      ) : (
+        <AiOutlineCamera />
+      )}
     </span>
   );
 };

@@ -143,7 +143,7 @@ const Contacts = ({ history }) => {
             <Spinner color="info"> </Spinner>
           </div>
         ) : (
-          <Col xs={12} md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
+          <Col xs={12}>
             <Switch>
               <Route
                 path={`${path}/add`}

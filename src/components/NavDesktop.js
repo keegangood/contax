@@ -4,11 +4,11 @@ import { Row, Col, Navbar, Nav, NavLink } from "reactstrap";
 
 import Avatar from "./Avatar";
 import ContactFilter from "../pages/Contacts/ContactFilter";
+import ContactAvatar from "../components/Avatar";
 
 import "./scss/NavDesktop.scss";
 
 const NavDesktop = ({ isAuthenticated, user, onLogout }) => {
-
   const location = useLocation();
 
   return (
@@ -31,36 +31,62 @@ const NavDesktop = ({ isAuthenticated, user, onLogout }) => {
           pb-1
         "
       >
-        <Col xs={1}>
-          <Link to="/app" id="navbar-title" className="ps-2">
+        <Col xs={1} sm={2} md={1}>
+          <NavLink
+            to="/app"
+            id="navbar-title"
+            className="ps-2 ps-lg-4"
+            style={{ display: "flex", alignItems: "center" }}
+          >
             Contax
-          </Link>
+          </NavLink>
         </Col>
-        <Col xs={5} className="d-flex">
-          <NavLink tag={Link} to="/about">
+        <Col xs={5} className="d-flex ps-3">
+          <NavLink
+            tag={Link}
+            to="/about"
+            style={{ display: "flex", alignItems: "center" }}
+          >
             About
           </NavLink>
         </Col>
-        <Col xs={6} className="d-flex justify-content-end">
+        <Col xs={6} sm={5} md={6} className="d-flex justify-content-end">
           <Nav>
             {user && (
-              <NavLink tag={Link} onClick={onLogout}>
+              <NavLink
+                tag={Link}
+                onClick={onLogout}
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 Log out
               </NavLink>
             )}
             <span className="d-flex">
               {user ? (
                 <>
-                  <NavLink tag={Link} to="/login" className="py-0 my-auto">
-                    <Avatar contact={user} />
+                  <NavLink
+                    tag={Link}
+                    to="/login"
+                    className="py-0 my-auto"
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    <ContactAvatar user={user} id={1} />
                   </NavLink>
                 </>
               ) : (
                 <>
-                  <NavLink tag={Link} to="/login">
+                  <NavLink
+                    tag={Link}
+                    to="/login"
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
                     Log in
                   </NavLink>
-                  <NavLink tag={Link} to="/signup">
+                  <NavLink
+                    tag={Link}
+                    to="/signup"
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
                     Sign up
                   </NavLink>
                 </>
@@ -69,7 +95,7 @@ const NavDesktop = ({ isAuthenticated, user, onLogout }) => {
           </Nav>
         </Col>
       </Row>
-      {(isAuthenticated && location.pathname === '/app') && (
+      {isAuthenticated && location.pathname === "/app" && (
         <Row className="g-0 bg-primary w-100 py-2">
           <Col xs={{ size: 6, offset: 3 }}>
             <ContactFilter />

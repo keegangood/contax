@@ -25,10 +25,10 @@ import { RiCake2Line } from "react-icons/ri";
 
 import Avatar from "../../components/Avatar";
 import ContactDeletePopover from "./ContactDeletePopover";
+import ContactAvatar from "../../components/Avatar";
 
 import { requestAccessToken } from "../../state/AuthSlice";
 import { getContactDetail, setCurrentContact } from "../../state/ContactSlice";
-
 import "./scss/ContactDetail.scss";
 
 const ContactDetail = ({ onDeleteContact, history }) => {
@@ -39,6 +39,7 @@ const ContactDetail = ({ onDeleteContact, history }) => {
   const { currentContact, contactLoadingStatus } = useSelector(
     (state) => state.contacts
   );
+  const { user } = useSelector((state) => state.auth);
   const [contact, setContact] = useState({});
   const [popoverIsOpen, setPopoverIsOpen] = useState(false);
 
@@ -62,7 +63,7 @@ const ContactDetail = ({ onDeleteContact, history }) => {
                 dispatch(setCurrentContact(contact));
               })
               .catch((err) => {
-                dispatch(addAlert({text:err.message, alertType:'danger'}))
+                dispatch(addAlert({ text: err.message, alertType: "danger" }));
                 history.push("/app");
               });
           })
@@ -82,14 +83,17 @@ const ContactDetail = ({ onDeleteContact, history }) => {
 
   return (
     currentContact && (
-      <Container id="contact-detail-content">
-        <Row className="g-0 pt-5 mx-2">
+      <Container id="contact-detail-content" className="mt-5">
+        <Row className="g-0 mt-5 contact-body">
           <Col
             xs={12}
+            lg={{ size: 6, offset: 3 }}
             className="
               bg-secondary
               rounded
-            "
+              contact-item
+              pb-3
+              "
           >
             {/* DETAIL HEADER */}
             <Row
@@ -99,13 +103,14 @@ const ContactDetail = ({ onDeleteContact, history }) => {
                 border-bottom
                 border-3
                 border-info
-              "
+                position-relative
+                "
             >
               <Col
                 xs={{ size: 6, offset: 3 }}
                 className="d-flex justify-content-center p-3"
               >
-                <Avatar className="contact-avatar" />
+                <ContactAvatar user={user} id={1} />
               </Col>
               <Col
                 xs={3}
@@ -170,7 +175,7 @@ const ContactDetail = ({ onDeleteContact, history }) => {
                 contact={contact}
               />
             ) : (
-              <Row className="g-0 p-3 bg-primary">
+              <Row className="g-0 p-3 bg-primary position-relative contact-body">
                 {/* EMAIL FIELD */}
                 <Col
                   xs={2}
@@ -230,7 +235,7 @@ const ContactDetail = ({ onDeleteContact, history }) => {
                     border-bottom
                     border-secondary
                     mb-3 mb-md-4
-                    ps-3 pb-3
+                    ps-sm-3 pb-sm-3
                   "
                 >
                   {PHONE_TYPES.map((PHONE_TYPE) => (
@@ -247,33 +252,23 @@ const ContactDetail = ({ onDeleteContact, history }) => {
                         {titleize(PHONE_TYPE)}
                       </Col>
                       <Col
-                        xs={6}
-                        md={6}
-                        className="border-bottom border-secondary mb-2 pt-2 ps-2"
+                        xs={8}
+                        md={10}
+                        className="border-bottom border-secondary mb-2 pt-2 ps-md-2"
                       >
                         {formatPhoneNumber(
                           currentContact[
                             `${PHONE_TYPE.toLowerCase()}PhoneNumber`
                           ] || ""
                         )}
-                      </Col>
-                      <Col
-                        xs={2}
-                        md={2}
-                        className="
-                          text-warning  
-                          border-bottom
-                          border-secondary
-                          mb-2
-                          ps-3
-                          pt-2 pt-md-0
-                        "
-                      >
                         {currentContact[
                           `${currentContact.primaryPhone.toLowerCase()}PhoneNumber`
                         ] &&
                           currentContact.primaryPhone === PHONE_TYPE && (
-                            <AiFillStar title="Primary phone" />
+                            <AiFillStar
+                              title="Primary phone"
+                              className="text-warning ms-3"
+                            />
                           )}
                       </Col>
                     </Row>
@@ -299,7 +294,7 @@ const ContactDetail = ({ onDeleteContact, history }) => {
                     align-items-md-start
                   "
                 >
-                  <RiCake2Line className="text-secondary" />
+                  <RiCake2Line className="text-secondary ms-md-auto" />
                 </Col>
                 <Col
                   xs={10}
@@ -309,15 +304,17 @@ const ContactDetail = ({ onDeleteContact, history }) => {
                     border-bottom
                     border-secondary
                     mb-3 mb-md-4
-                    pb-2 pt-md-2
-                    ps-3 ps-lg-0
+                    pb-2 pt-1 pt-md-2
+                    ps-2
                     d-flex align-items-end
                     align-items-md-start
                   "
                 >
-                  {currentContact.birthday
-                    ? dayjs(currentContact.birthday).format("M / DD / YYYY")
-                    : "Not Provided"}
+                  <div className="small-lg">
+                    {currentContact.birthday
+                      ? dayjs(currentContact.birthday).format("M / DD / YYYY")
+                      : "Not Provided"}
+                  </div>
                 </Col>
 
                 {/* NOTES FIELD */}

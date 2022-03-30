@@ -42,7 +42,7 @@ const ContactList = ({ contacts, onDeleteContact }) => {
       {contacts.length === 0 ? (
         <Col
           xs={12}
-          lg={{ size: 8, offset: 2 }}
+          lg={{ size: 10, offset: 2 }}
           xl={{ size: 6, offset: 3 }}
           className="text-center"
         >
@@ -56,6 +56,7 @@ const ContactList = ({ contacts, onDeleteContact }) => {
             popoverIsOpen={popoversOpen[contact.id]}
             onDeleteContact={onDeleteContact}
             key={i}
+            id={i}
           />
         ))
       )}

@@ -68,14 +68,14 @@ function App({ history }) {
       ) : (
         <div className="mt-5">
           {alerts.length > 0 && <Alerts alerts={alerts} />}
-          <span className="d-none d-md-block">
+          <span className="d-none d-lg-block">
             <NavDesktop
               user={user}
               onLogout={onLogout}
               isAuthenticated={isAuthenticated}
             />
           </span>
-          <span className="d-block d-md-none">
+          <span className="d-block d-lg-none">
             <NavMobile
               user={user}
               isAuthenticated={isAuthenticated}

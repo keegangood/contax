@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useRouteMatch } from "react-router-dom";
 import { Fade } from "reactstrap";
 import formatPhoneNumber from "../../utils/formatPhoneNumber";
@@ -30,11 +30,12 @@ const ContactItem = ({
   onDeleteContact,
   filterBy,
   filterQuery,
+  id,
 }) => {
   const dispatch = useDispatch();
   const { contactId } = useParams();
   const { path } = useRouteMatch();
-
+  const { user } = useSelector((state) => state.auth);
   const { firstName, lastName, email, primaryPhone } = contact;
 
   useEffect(() => {
@@ -45,10 +46,10 @@ const ContactItem = ({
 
   return (
     <Col
-      sm={12}
-      md={{size:8, offset: 2}}
-      lg={{size:6, offset: 3}}
-      className="px-0 pb-2 mb-3 pb-md-3 mb-md-4 contact-item shadow rounded"
+      sm={{ size: 10, offset: 1 }}
+      md={{ size: 8, offset: 2 }}
+      xl={{ size: 4, offset: 4 }}
+      className="px-0 pb-3 mb-3 mb-md-4 contact-item shadow rounded"
       id={`contact-${contact.id}`}
     >
       <Row className="contact-body position-relative rounded ">
@@ -74,7 +75,7 @@ const ContactItem = ({
           "
         >
           <Col xs={12} md={3} className="d-flex justify-content-center">
-            <ContactAvatar contact={contact} />
+            <ContactAvatar contact={contact} user={user} id={id} />
           </Col>
 
           <Col
@@ -113,8 +114,8 @@ const ContactItem = ({
                   field-icon
                   border-bottom
                   border-secondary
-                  mb-3
-                  mb-md-4
+                  pb-3
+                  pb-md-4
                   d-flex
                   justify-content-center
                   align-items-center
@@ -124,7 +125,7 @@ const ContactItem = ({
             </Col>
             <Col
               xs={10}
-              className="contact-field border-bottom border-secondary mb-3 mb-md-4"
+              className="contact-field border-bottom border-secondary pb-3 pb-md-4"
             >
               {email ? email : "Not Provided"}
             </Col>
@@ -138,8 +139,8 @@ const ContactItem = ({
                   d-flex
                   justify-content-center
                   align-items-center
-                  mb-3
-                  mb-md-4
+                  py-2 py-md-3
+
                 "
             >
               <AiOutlinePhone className="text-secondary" />
@@ -150,8 +151,8 @@ const ContactItem = ({
                   contact-field
                   border-bottom
                   border-secondary
-                  mb-3
-                  mb-md-4
+                  py-2 py-md-3
+
                 "
             >
               {contact[`${primaryPhone.toLowerCase()}PhoneNumber`] ? (
@@ -164,7 +165,7 @@ const ContactItem = ({
                 "Not Provided"
               )}
             </Col>
-            {contact.notes !== [] && (
+            {!!contact.notes && (
               <>
                 <Col
                   xs={2}
@@ -174,13 +175,16 @@ const ContactItem = ({
                       border-secondary
                       d-flex
                       justify-content-center
+                      py-2 py-md-3
                     "
                 >
                   <AiOutlineFileText className="text-secondary" />
                 </Col>
                 <Col
                   xs={10}
-                  className="contact-field border-bottom border-secondary"
+                  className="contact-field border-bottom border-secondary 
+                  py-2 py-md-3
+                  "
                 >
                   {contact.notes.length > 0 &&
                     contact.notes.map((note, i) => (
