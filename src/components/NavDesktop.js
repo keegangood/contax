@@ -31,27 +31,28 @@ const NavDesktop = ({ isAuthenticated, user, onLogout }) => {
           pb-1
         "
       >
-        <Col xs={1} sm={2} md={1}>
+        <Col xs={6} className="d-flex gap-2 align-items-center">
           <NavLink
             to="/app"
             id="navbar-title"
             className="ps-2 ps-lg-4"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+            style={{ display: "flex", alignItems: "flex-end" }}
+            >
             Contax
           </NavLink>
+          
         </Col>
-        <Col xs={5} className="d-flex ps-3">
+        
+        <Col xs={6} sm={5} md={6} className="d-flex justify-content-end">
+          <Nav>
           <NavLink
             tag={Link}
             to="/about"
-            style={{ display: "flex", alignItems: "center" }}
+            style={{ display: "flex", alignItems: 'center' }}
           >
+
             About
           </NavLink>
-        </Col>
-        <Col xs={6} sm={5} md={6} className="d-flex justify-content-end">
-          <Nav>
             {user && (
               <NavLink
                 tag={Link}
