@@ -25,7 +25,7 @@ import Notes from "./Notes";
 
 import "./scss/ContactForm.scss";
 import { addNote, setNewNoteText, setNotes } from "../../state/NoteSlice";
-import { getContactDetail, setCurrentContact } from "../../state/ContactSlice";
+import { getContactDetail, setCurrentContact, updateContact } from "../../state/ContactSlice";
 import { requestAccessToken } from "../../state/AuthSlice";
 import { addAlert, removeAlert } from "../../state/AlertSlice";
 
@@ -77,7 +77,6 @@ const ContactForm = ({ formAction, onSubmit, history }) => {
 
             dispatch(getContactDetail({ accessToken, contactId }))
               .then(unwrapResult)
-              .then((res) => console.log("woo!", res))
               .catch((err) => {
                 let alert = { text: err.message, alertType: "danger" };
                 dispatch(addAlert(alert));
@@ -85,7 +84,6 @@ const ContactForm = ({ formAction, onSubmit, history }) => {
               });
           })
           .catch((err) => {
-            console.log(err);
             history.push("/login");
           });
       })();
@@ -176,13 +174,6 @@ const ContactForm = ({ formAction, onSubmit, history }) => {
                     {formAction === "add" ? "Create" : "Edit"}
                   </span>
                   </Col>
-                  {/* FORM ACTION */}
-                  {/* <Col
-                    xs={7}
-                    className="d-flex align-items-center ps-3 ps-lg-3"
-                  >
-                  </Col> */}
-                  {/* FORM CLOSE BUTTON */}
                   <Col
                     xs={6}
                     className="d-flex justify-content-end align-items-center"

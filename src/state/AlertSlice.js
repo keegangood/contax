@@ -21,7 +21,6 @@ const AlertSlice = createSlice({
       };
     },
     removeAlert: (state, action) => {
-      console.log("ACTION PAYLOAD", action.payload);
       return {
         ...state,
         alerts: state.alerts.filter((alert) => alert === action.payload),
