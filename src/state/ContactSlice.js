@@ -138,7 +138,7 @@ const initialState = {
   contacts: null, // logged in user's current access token
   filteredContacts: [],
   currentContact: null,
-  contactLoadingStatus: "PENDING", // status of async operation ['IDLE', 'PENDING', 'SUCCESS', 'FAIL']
+  contactLoadingStatus: "IDLE", // status of async operation ['IDLE', 'PENDING', 'SUCCESS', 'FAIL']
   orderBy: "firstName",
   filterBy: "name",
   filterQuery: "",
