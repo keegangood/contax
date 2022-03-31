@@ -41,7 +41,6 @@ const { contactLoadingStatus } = useSelector(state=>state.contacts)
 
   useEffect(() => {
       (async () => {
-        alert('REQUESTING TOKEN FROM APP')
         await dispatch(requestAccessToken()).then(unwrapResult)
         .then((res) => {
           const { accessToken } = res;
