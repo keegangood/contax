@@ -30,10 +30,10 @@ function App({ history }) {
   const dispatch = useDispatch();
   const [cookies, setCookie, removeCookie] = useCookies([]);
 
-  let { isAuthenticated, authLoadingStatus, user } = useSelector(
+  let { isAuthenticated, authLoadingStatus, user, accessToken } = useSelector(
     (state) => state.auth
   );
-const { contactLoadingStatus } = useSelector(state=>state.contacts)
+const { contactLoadingStatus, contacts } = useSelector(state=>state.contacts)
 
   const { alerts } = useSelector((state) => state.alerts);
 
@@ -42,16 +42,15 @@ const { contactLoadingStatus } = useSelector(state=>state.contacts)
   useEffect(() => {
       (async () => {
         await dispatch(requestAccessToken()).then(unwrapResult)
-        .then((res) => {
-          const { accessToken } = res;
-          dispatch(getContacts({ accessToken, orderBy }));
-        })
         .catch((err) =>{
           history.push('/login')
         });
       })();
-    // }
-  }, []);
+  }, [dispatch, requestAccessToken, history]);
+
+  useEffect(()=>{
+    dispatch(getContacts({ accessToken, orderBy }));
+  },[accessToken])
 
   const onLogout = () => {
     dispatch(logout())
