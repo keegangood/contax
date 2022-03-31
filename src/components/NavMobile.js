@@ -79,21 +79,27 @@ const NavMobile = ({ user, onLogout, path, navOpen, setNavOpen, history }) => {
                   <Hamburger navOpen={navOpen} setNavOpen={setNavOpen} />
                 </Col>
                 <Col
-                  xs={6}
+                  xs={12}
                   className="
                     d-flex
                     flex-column
                     align-items-center
                     justify-content-center
                     pb-5
+                    mt-5
                   "
                 >
                   {user ? (
                     <>
-                      <Avatar
-                        contact={user}
-                        border={{ color: "secondary", width: 3 }}
-                      />
+                      <NavLink
+                        tag={Link}
+                        to="/login"
+                        className="py-0 my-auto"
+                        style={{ display: "flex", alignItems: "center" }}
+                      >
+                        <Avatar user={user} id={1} />
+                      </NavLink>
+
                       <div id="username-value" className="">
                         {user.username}
                       </div>
@@ -123,7 +129,7 @@ const NavMobile = ({ user, onLogout, path, navOpen, setNavOpen, history }) => {
                     </div>
                   )}
                 </Col>
-                <Col xs={6} className="pb-5">
+                <Col xs={12} className="pb-5 text-center">
                   <NavLink
                     tag={Link}
                     to="/app"
