@@ -40,15 +40,16 @@ const { contactLoadingStatus } = useSelector(state=>state.contacts)
   const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
-    // if (!isAuthenticated && !user && authLoadingStatus === "PENDING") {
       (async () => {
-        console.log('REQUESTING TOKEN FROM APP')
+        alert('REQUESTING TOKEN FROM APP')
         await dispatch(requestAccessToken()).then(unwrapResult)
         .then((res) => {
           const { accessToken } = res;
           dispatch(getContacts({ accessToken, orderBy }));
+          alert(JSON.stringify(cookies))
         })
         .catch((err) =>{
+          alert(JSON.stringify(cookies))
           history.push('/login')
         });
       })();
