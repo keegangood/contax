@@ -69,6 +69,7 @@ export const createContact = createAsyncThunk(
 export const updateContact = createAsyncThunk(
   "contacts/update",
   async ({ contactId, formData, accessToken }, { rejectWithValue }) => {
+
     const url = BASE_URL + `/detail/${contactId}`;
 
     const response = await axios
