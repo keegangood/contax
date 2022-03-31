@@ -30,7 +30,8 @@ const ContactItem = ({
   onDeleteContact,
   filterBy,
   filterQuery,
-  id,
+  history,
+  id
 }) => {
   const dispatch = useDispatch();
   const { contactId } = useParams();
@@ -57,47 +58,69 @@ const ContactItem = ({
 
         {/* AVATAR */}
         <Row
-          tag={Link}
-          to={`/app/detail/${contact.id}`}
-          onClick={() => {
-            dispatch(setCurrentContact(contact));
-          }}
           className="
-            contact-item-header
             g-0
+            pb-3
+            border-bottom
+            border-3
+            border-info
+            position-relative
             bg-secondary
             rounded-top
-            py-3
-            border-bottom
-            border-info
-            border-3
-            text-decoration-none
-          "
+            "
         >
-          <Col xs={12} md={3} className="d-flex justify-content-center">
-            <ContactAvatar contact={contact} user={user} id={id} />
+          <Col
+            xs={{ size: 6, offset: 3 }}
+            className="d-flex justify-content-center p-3"
+          >
+            <Link
+              to={{
+                pathname: `/app/detail/${contact.id}`,
+                state: { referer: path },
+              }}
+            >
+              <ContactAvatar user={user} id={id} />
+            </Link>
           </Col>
-
           <Col
             xs={12}
-            md={9}
-            className="
-              contact-field
-              name-field
-              border-bottom
-              border-secondary
-              mt-2 mt-md-0
-              d-flex
-              align-items-end justify-content-center
-              align-items-md-center justify-content-md-start
-            "
+            md={{ size: 8, offset: 2 }}
+            className="contact-full-name text-center"
           >
-            <span>
-              {firstName} {lastName}
+            {contact.firstName} {contact.lastName}
+          </Col>
+          <Col
+            xs={{ size: 6, offset: 3 }}
+            md={{ size: 2, offset: 0 }}
+            className="
+                  d-flex
+                  align-items-center justify-content-center 
+                  justify-content-xl-end
+                  mt-3 mt-md-0
+                "
+          >
+            <Link
+              to={{
+                pathname: `/app/edit/${contact.id}`,
+                state: { referer: path },
+              }}
+            >
+              <AiOutlineEdit
+                className="crud-icon edit-icon m-2"
+                onClick={() => {
+                  dispatch(setCurrentContact(contact));
+                }}
+              />
+            </Link>
+            <span className="position-relative">
+              <AiOutlineDelete
+                id={`contact-${contact.id}-popover`}
+                className="crud-icon delete-icon m-2"
+                onClick={() => togglePopover(contact.id, !popoverIsOpen)}
+              />
             </span>
           </Col>
         </Row>
-
         {/* NAME, EMAIL AND PHONE */}
         {popoverIsOpen ? (
           <ContactDeletePopover
@@ -171,8 +194,6 @@ const ContactItem = ({
                   xs={2}
                   className="
                       field-icon
-                      border-bottom
-                      border-secondary
                       d-flex
                       justify-content-center
                       py-2 py-md-3
@@ -182,8 +203,9 @@ const ContactItem = ({
                 </Col>
                 <Col
                   xs={10}
-                  className="contact-field border-bottom border-secondary 
-                  py-2 py-md-3
+                  className="
+                    contact-field
+                    py-2 py-md-3
                   "
                 >
                   {contact.notes.length > 0 &&
@@ -193,37 +215,6 @@ const ContactItem = ({
                 </Col>
               </>
             )}
-            <Col
-              xs={12}
-              className="
-                d-flex
-                align-items-center
-                justify-content-end 
-                mt-3
-                pb-3
-              "
-            >
-              <Link
-                to={{
-                  pathname: `/app/edit/${contact.id}`,
-                  state: { referer: path },
-                }}
-              >
-                <AiOutlineEdit
-                  className="crud-icon edit-icon m-2"
-                  onClick={() => {
-                    dispatch(setCurrentContact(contact));
-                  }}
-                />
-              </Link>
-              <span className="position-relative">
-                <AiOutlineDelete
-                  id={`contact-${contact.id}-popover`}
-                  className="crud-icon delete-icon m-2"
-                  onClick={() => togglePopover(contact.id, !popoverIsOpen)}
-                />
-              </span>
-            </Col>
           </Row>
         )}
       </Row>

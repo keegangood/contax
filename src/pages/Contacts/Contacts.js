@@ -164,6 +164,7 @@ const Contacts = ({ history }) => {
                 <ContactList
                   contacts={filteredContacts}
                   onDeleteContact={onDeleteContact}
+                  history={history}
                 />
               )}
             />
