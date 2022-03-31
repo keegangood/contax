@@ -52,7 +52,6 @@ const UserAuth = ({ pageAction, pageTitle, history, ...props }) => {
           // set alert
           let alert = { text: "Welcome!", alertType: "success" };
           dispatch(addAlert(alert));
-          console.log('cookies', cookies)
 
           // redirect
           if (history) {
