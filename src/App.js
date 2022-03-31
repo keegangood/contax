@@ -46,10 +46,8 @@ const { contactLoadingStatus } = useSelector(state=>state.contacts)
         .then((res) => {
           const { accessToken } = res;
           dispatch(getContacts({ accessToken, orderBy }));
-          alert(JSON.stringify(cookies))
         })
         .catch((err) =>{
-          alert(JSON.stringify(cookies))
           history.push('/login')
         });
       })();
