@@ -1,5 +1,7 @@
 # Contax
 
+<img src="./banner.png" width=600 alt="contax app banner"/>
+
 Contax is a single-page contact manager application built as the representation of one year of learning React. 
 
 See the app in production [here](https://contaxapp.netlify.app/).
