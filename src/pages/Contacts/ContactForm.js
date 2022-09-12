@@ -147,9 +147,9 @@ const ContactForm = ({ formAction, onSubmit, history }) => {
     onSubmit(
       {
         ...formData,
-        homePhoneNumber: stripPhoneNumber(homePhoneNumber),
-        cellPhoneNumber: stripPhoneNumber(cellPhoneNumber),
-        workPhoneNumber: stripPhoneNumber(workPhoneNumber),
+        homePhoneNumber: stripPhoneNumber(formData.homePhoneNumber),
+        cellPhoneNumber: stripPhoneNumber(formData.cellPhoneNumber),
+        workPhoneNumber: stripPhoneNumber(formData.workPhoneNumber),
         notes,
       },
       redirectUrl
