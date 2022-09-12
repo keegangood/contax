@@ -31,7 +31,7 @@ const ContactItem = ({
   filterBy,
   filterQuery,
   history,
-  id
+  id,
 }) => {
   const dispatch = useDispatch();
   const { contactId } = useParams();
@@ -48,8 +48,8 @@ const ContactItem = ({
   return (
     <Col
       sm={{ size: 10, offset: 1 }}
-      md={{ size: 8, offset: 2 }}
-      xl={{ size: 4, offset: 4 }}
+      md={{ size: 6 }}
+      xl={{ size: 4 }}
       className="px-0 pb-3 mb-3 mb-md-4 contact-item shadow rounded"
       id={`contact-${contact.id}`}
     >
@@ -199,7 +199,22 @@ const ContactItem = ({
                       py-2 py-md-3
                     "
                 >
-                  <AiOutlineFileText className="text-secondary" />
+                  <div className="position-relative">
+                    {contact.notes.length > 1 && (
+                      <div
+                        className="
+                        additional-notes-badge 
+                        position-absolute 
+                        translate-middle 
+                        bg-info rounded-circle
+                        d-flex justify-content-center align-items-center
+                        "
+                      >
+                        <div>{contact.notes.length.toString()}</div>
+                      </div>
+                    )}
+                    <AiOutlineFileText className="text-secondary" />
+                  </div>
                 </Col>
                 <Col
                   xs={10}
@@ -208,10 +223,9 @@ const ContactItem = ({
                     py-2 py-md-3
                   "
                 >
-                  {contact.notes.length > 0 &&
-                    contact.notes.map((note, i) => (
-                      <div>&bull; {note.text}</div>
-                    ))}
+                  {contact.notes.length > 0 && (
+                    <div>&bull; {contact.notes[0].text}</div>
+                  )}
                 </Col>
               </>
             )}

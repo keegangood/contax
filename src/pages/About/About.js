@@ -31,7 +31,7 @@ const About = () => {
         <Col xs={12}>
           <Jumbotron className="my-5 bg-secondary">
             <Row className="g-0 bg-primary">
-              <Col xs={12} className="">
+              <Col xs={12}>
                 <h1
                   id="about-title"
                   className="
@@ -50,6 +50,7 @@ const About = () => {
               <Col
                 xs={11}
                 md={8}
+                lg={{ size: 6, offset: 2 }}
                 className="p-3 p-lg-5 my-4 my-lg-5 mx-auto ms-sm-3 ms-md-5 bg-light rounded shadow"
               >
                 <span id="app-name">Contax</span> is a contact manager created

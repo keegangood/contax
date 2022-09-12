@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { logout } from "./state/AuthSlice";
@@ -22,10 +22,7 @@ import Alerts from "./components/Alerts/Alerts";
 import PrivateRoute from "./components/PrivateRoute";
 
 import { requestAccessToken } from "./state/AuthSlice";
-import {
-  getContacts,
-  orderBy
-} from "./state/ContactSlice";
+import { getContacts, orderBy } from "./state/ContactSlice";
 function App({ history }) {
   const dispatch = useDispatch();
   const [cookies, setCookie, removeCookie] = useCookies([]);
@@ -33,24 +30,28 @@ function App({ history }) {
   let { isAuthenticated, authLoadingStatus, user, accessToken } = useSelector(
     (state) => state.auth
   );
-const { contactLoadingStatus, contacts } = useSelector(state=>state.contacts)
+  const { contactLoadingStatus, contacts } = useSelector(
+    (state) => state.contacts
+  );
 
   const { alerts } = useSelector((state) => state.alerts);
 
   const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
-      (async () => {
-        await dispatch(requestAccessToken()).then(unwrapResult)
-        .catch((err) =>{
-          history.push('/login')
+    (async () => {
+      await dispatch(requestAccessToken())
+        .then(unwrapResult)
+        .catch((err) => {
+          // console.log(history);
+          // history.push("/login");
         });
-      })();
+    })();
   }, [dispatch, requestAccessToken, history]);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getContacts({ accessToken, orderBy }));
-  },[accessToken])
+  }, [accessToken]);
 
   const onLogout = () => {
     dispatch(logout())
@@ -63,7 +64,7 @@ const { contactLoadingStatus, contacts } = useSelector(state=>state.contacts)
 
   return (
     <Container fluid className="app g-0">
-      {authLoadingStatus === "PENDING" || contactLoadingStatus === 'PENDING'? (
+      {authLoadingStatus === "PENDING" || contactLoadingStatus === "PENDING" ? (
         <div
           className="
             spinner
@@ -72,8 +73,9 @@ const { contactLoadingStatus, contacts } = useSelector(state=>state.contacts)
             justify-content-center
           "
         >
-          <Spinner color="info" className="spinner-border"> </Spinner>
-          
+          <Spinner color="info" className="spinner-border">
+            {" "}
+          </Spinner>
         </div>
       ) : (
         <div className="mt-5">

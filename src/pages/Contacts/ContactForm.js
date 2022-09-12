@@ -25,9 +25,14 @@ import Notes from "./Notes";
 
 import "./scss/ContactForm.scss";
 import { addNote, setNewNoteText, setNotes } from "../../state/NoteSlice";
-import { getContactDetail, setCurrentContact, updateContact } from "../../state/ContactSlice";
+import {
+  getContactDetail,
+  setCurrentContact,
+  updateContact,
+} from "../../state/ContactSlice";
 import { requestAccessToken } from "../../state/AuthSlice";
 import { addAlert, removeAlert } from "../../state/AlertSlice";
+import { stripPhoneNumber } from "../../utils/stripPhoneNumber";
 
 const PHONE_TYPES = ["CELL", "HOME", "WORK"];
 
@@ -50,7 +55,7 @@ const ContactForm = ({ formAction, onSubmit, history }) => {
   const { currentContact, contactLoadingStatus } = useSelector(
     (state) => state.contacts
   );
-  const {user} = useSelector(state=>state.auth)
+  const { user } = useSelector((state) => state.auth);
   const { contactId } = useParams();
 
   useEffect(() => {
@@ -142,6 +147,9 @@ const ContactForm = ({ formAction, onSubmit, history }) => {
     onSubmit(
       {
         ...formData,
+        homePhoneNumber: stripPhoneNumber(homePhoneNumber),
+        cellPhoneNumber: stripPhoneNumber(cellPhoneNumber),
+        workPhoneNumber: stripPhoneNumber(workPhoneNumber),
         notes,
       },
       redirectUrl
@@ -169,10 +177,10 @@ const ContactForm = ({ formAction, onSubmit, history }) => {
                 <Row className="g-0">
                   {/* CONTACT AVATAR */}
                   <Col xs={6} className="d-flex align-items-center">
-                    <Avatar contact={currentContact} user={user} id={1}/>
-                  <span className="ps-3">
-                    {formAction === "add" ? "Create" : "Edit"}
-                  </span>
+                    <Avatar contact={currentContact} user={user} id={1} />
+                    <span className="ps-3">
+                      {formAction === "add" ? "Create" : "Edit"}
+                    </span>
                   </Col>
                   <Col
                     xs={6}

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import { AiOutlineCamera } from "react-icons/ai";
 
 const Avatar = (props) => {
+  const picNumber = useRef(Math.floor(Math.random() * 100));
   return (
     <span
       className={
@@ -14,12 +15,15 @@ const Avatar = (props) => {
     >
       {/* LOAD USER AVATAR ONCE AVAILABLE */}
       {props.user && props.user.email === "guest@contax.com" ? (
-        <div className="rounded-circle d-flex align-items-center justify-content-center" style={{ objectFit: "contain" }}>
+        <div
+          className="rounded-circle d-flex align-items-center justify-content-center"
+          style={{ objectFit: "contain" }}
+        >
           <img
-            src={`https://picsum.photos/${200 + Math.abs(props.id - 5)}`}
+            src={`https://picsum.photos/id/${picNumber.current}/200`}
             alt="Avatar"
             className="rounded-circle"
-            style={{width:'90%'}}
+            style={{ width: "90%" }}
           />
         </div>
       ) : (
