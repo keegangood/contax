@@ -72,7 +72,23 @@ const UserAuthForm = ({ formAction, callApi }) => {
         </button>
       </div>
       {formAction === "login" && (
-        <div className="mt-3">
+        <div className="mt-3 d-flex flex-column">
+          <div id="login-as-guest" className="small">
+            Try out the app. Log in as a{" "}
+            <a
+              href="#"
+              className="link-warning text-decoration-none"
+              onClick={() => {
+                setFormData({
+                  email: "guest@contax.com",
+                  password: "pass3412",
+                });
+              }}
+            >
+              guest
+            </a>
+            .
+          </div>
           <a
             href="#"
             className="

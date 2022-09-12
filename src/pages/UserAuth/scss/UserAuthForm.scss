@@ -9,9 +9,11 @@
         // border: 1px solid $lighter-copper;
     }
 
-    #forgot-password {
+    #forgot-password,
+    #login-as-guest {
         color: $font-color-display-accent;
     }
+
 
     .form-control,
     .form-label,
@@ -19,6 +21,7 @@
         width: 100%;
         font-family: $secondary-font;
     }
+
     .form-label {
         color: $font-color-display;
     }
